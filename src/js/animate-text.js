@@ -6,7 +6,7 @@ class TextAnimator {
 	}
 	split() {
 		this.text = splitText(this.text);
-		return this; 
+		return this;
 	}
 	intoDOM(tag, className, target) {
 		elementsIntoDOM(this.text, tag, className, target);
@@ -15,7 +15,7 @@ class TextAnimator {
 }
 
 export function AnimateText(text) {
-	if(!(this instanceof TextAnimator)) {
+	if (!(this instanceof TextAnimator)) {
 		return new TextAnimator(text);
 	}
 	return new TextAnimator(text);
