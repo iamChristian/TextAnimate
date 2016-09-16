@@ -1,15 +1,20 @@
-import { splitText, elementsIntoDOM } from './utils';
+import { splitText, elementsIntoDOM, sequentialAddClass } from './utils';
 
 class TextAnimator {
 	constructor(text) {
 		this.text = text;
+		this.elements = [];
 	}
 	split() {
 		this.text = splitText(this.text);
 		return this;
 	}
 	intoDOM(tag, className, target) {
-		elementsIntoDOM(this.text, tag, className, target);
+		this.elements = elementsIntoDOM(this.text, tag, className, target);
+		return this;
+	}
+	animate(arr) {
+		sequentialAddClass(this.elements);
 		return this;
 	}
 }

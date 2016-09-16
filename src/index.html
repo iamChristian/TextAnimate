@@ -4,17 +4,22 @@
 		<title>Text Animate</title>
 		<style type="text/css">
 			.text-animator {
+                opacity: 0;
 				font-size: 20px;
 				font-weight: bold;
 				font-family: Arial;
+                transition: opacity 1s ease;
 			}
+            .text-animator.show {
+                opacity: 1;
+            }
 		</style>
 	</head>
 	<body>
 		<div id="entry"></div>
 		<script type="text/javascript" src="js/animate-text.js"></script>
 		<script type="text/javascript">
-			console.log(AnimateText('AO Let\'s Go!').split().intoDOM());
+			console.log(AnimateText('AO Let\'s Go!').split().intoDOM().animate());
 		</script>
 	</body>
 </html>

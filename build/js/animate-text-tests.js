@@ -101,14 +101,21 @@ return /******/ (function(modules) { // webpackBootstrap
 		value: true
 	});
 	exports.splitText = splitText;
-	exports.insertIntoDOM = insertIntoDOM;
 	exports.createElement = createElement;
+	exports.insertIntoDOM = insertIntoDOM;
 	exports.setTextContent = setTextContent;
 	exports.addClass = addClass;
 	exports.createArrayOfElements = createArrayOfElements;
 	exports.elementsIntoDOM = elementsIntoDOM;
+	exports.sequentialAddClass = sequentialAddClass;
 	function splitText(text) {
 		return text.split('');
+	}
+
+	function createElement() {
+		var tag = arguments.length <= 0 || arguments[0] === undefined ? 'span' : arguments[0];
+
+		return document.createElement(tag);
 	}
 
 	function insertIntoDOM() {
@@ -116,12 +123,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		var target = arguments.length <= 1 || arguments[1] === undefined ? document.body : arguments[1];
 
 		target.appendChild(element);
-	}
-
-	function createElement() {
-		var tag = arguments.length <= 0 || arguments[0] === undefined ? 'span' : arguments[0];
-
-		return document.createElement(tag);
 	}
 
 	function setTextContent() {
@@ -150,8 +151,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function elementsIntoDOM(arr, tag, className, target) {
-		createArrayOfElements(arr, tag, className).forEach(function (element) {
-			return insertIntoDOM(element, target);
+		return createArrayOfElements(arr, tag, className).map(function (element) {
+			insertIntoDOM(element, target);
+			return element;
+		});
+	}
+
+	function sequentialAddClass(arr) {
+		var timeOutVal = 0;
+		arr.forEach(function (el) {
+			timeOutVal = timeOutVal + 1000;
+			setTimeout(function () {
+				addClass(el, 'show');
+			}, timeOutVal);
 		});
 	}
 

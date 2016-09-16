@@ -2,12 +2,12 @@ export function splitText(text) {
 	return text.split('');
 }
 
-export function insertIntoDOM(element = createElement(), target = document.body) {
-	target.appendChild(element);
-}
-
 export function createElement(tag = 'span') {
 	return document.createElement(tag);
+}
+
+export function insertIntoDOM(element = createElement(), target = document.body) {
+	target.appendChild(element);
 }
 
 export function setTextContent(element = createElement(), text = '') {
@@ -25,5 +25,18 @@ export function createArrayOfElements(arr = [], tag, className) {
 }
 
 export function elementsIntoDOM(arr, tag, className, target) {
-	createArrayOfElements(arr, tag, className).forEach(element => insertIntoDOM(element, target));
+	return createArrayOfElements(arr, tag, className).map(element => {
+		insertIntoDOM(element, target);
+		return element;
+	});
+}
+
+export function sequentialAddClass(arr) {
+	let timeOutVal = 0;
+	arr.forEach(el => {
+		timeOutVal = timeOutVal + 1000;
+		setTimeout(() => {
+			addClass(el, 'show');
+		}, timeOutVal);
+	});
 }
